@@ -14,7 +14,7 @@
 	<name>sunpanels</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>17</java.version>
 		<kotlin.version>1.7.22</kotlin.version>
 	</properties>
 	<dependencies>
