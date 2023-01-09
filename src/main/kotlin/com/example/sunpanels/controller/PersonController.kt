@@ -8,13 +8,6 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
-//TODOD: POST a person [x]
-//verify emailadress not being duplicated[x]
-//GET emailadress/person by ID[x]
-//GET alla users[]
-//sätta in verifiering att det är en emailadress
-
-
 @RestController
 @RequestMapping("/api/persons")
 class PersonController (var personService : PersonServiceImp){
