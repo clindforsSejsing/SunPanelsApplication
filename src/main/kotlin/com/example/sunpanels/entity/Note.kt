@@ -1,32 +1,27 @@
 package com.example.sunpanels.entity
 
 import jakarta.persistence.*
-import lombok.AllArgsConstructor
-import lombok.Getter
-import lombok.NoArgsConstructor
-import lombok.Setter
 import java.time.LocalDateTime
 
+
+
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name="note")
 class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0
+    var id: Long = 0
+    var sunrise : LocalDateTime? = null
+    var sunset : LocalDateTime? = null
+    var incomeSek : Float = 0.0f
+    var nmbOfSunHours : Long? = 0
 
-    private lateinit var sunrise : LocalDateTime
-    private lateinit var sunset : LocalDateTime
-
-    @ManyToOne
+    @ManyToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name="person_id", referencedColumnName = "id")
-    private var person = Person()
+     var person : Person? = null
 
-    @ManyToOne
-    @JoinColumn(name="sunpanels_id", referencedColumnName = "id")
-    private var sunpanel = SunPanel()
+    @ManyToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name="sunpanel_id", referencedColumnName = "id")
+     var sunpanel : SunPanel? = null
 
 }

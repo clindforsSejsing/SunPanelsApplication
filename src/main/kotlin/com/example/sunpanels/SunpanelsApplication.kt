@@ -8,5 +8,4 @@ class SunpanelsApplication
 
 fun main(args: Array<String>) {
 	runApplication<SunpanelsApplication>(*args)
-	println("Hello world")
 }
