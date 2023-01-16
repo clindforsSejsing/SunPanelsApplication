@@ -1,5 +1,6 @@
 package com.example.sunpanels.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 
@@ -11,8 +12,8 @@ class Person {
     @Column (length= 75, unique = true, nullable = false)
     lateinit var email: String
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "person",  fetch = FetchType.EAGER)
+    var notes : List<Note> = ArrayList<Note>()
 
-
-  /*  @OneToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.EAGER,mappedBy= "person")
-     private lateinit var notes : ArrayList<Note>*/
 }
