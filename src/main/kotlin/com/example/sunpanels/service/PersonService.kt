@@ -8,7 +8,11 @@ import java.util.*
 @Service
 class PersonService(var personRepository: PersonRepository) {
 
-//RCF (standard) 5233, allows all characters in email but not pipe character and single quote, as these are potential for SQL injection.
+    /**
+     * @param person gets input from user, unic email.
+     * @return RCF standard (5233) allows all characters in email but not pipe character and single
+     * quote, as these are potential for SQL injection.
+     * */
     fun savePerson(person: Person): Person? {
        val pattern  = "[a-zA-Z0-9_!#\$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+\$".toRegex()
        val found = pattern.find(person.email)

@@ -21,6 +21,11 @@ class NoteService(
     var sunPanelRepository: SunPanelRepository
 ) {
 
+    /**
+     * @param note gets input from user, localdatetime for sunrise, sunset.
+     * @return feedback if month is june or july, then sets the number of sunhours and income in sek /h.
+     * */
+
     fun saveNote(note: Note, personId: Long, sunpanelId: Long): Note? {
         val selectedPerson: Person = findingPerson(personRepository.findById(personId), personId)
         val selectedSunpanel: SunPanel = findingSunPanel(sunPanelRepository.findById(sunpanelId), sunpanelId)
@@ -55,11 +60,18 @@ class NoteService(
     }
 
 
-    //add docs: sunRadiation - per day, sunEfficiancy 20 % per day, production * price, rounded to two dec in SEK.
-    //sunRadiation = 0.166 * sunPanelsArea (* sunHours)
-    //sunEfficiancy = 0.20 (percent/day)
-    //elProduction = sunRadiation * sunEfficiancy
-    //incomeInSek = elproduction * electricPrice
+
+    /**
+     * @param sunPanel gets input from user
+     * @param sunHours gets the amount of hours the sun shines from sunrise til sunset.
+     * @return calculate and return income in sek, rounded with two decimals.
+     * sunRadiation - per day, sunEfficiancy 20 % per day, production * price, rounded to two dec in SEK.
+     * sunRadiation = 0.166 * sunPanelsArea (* sunHours)
+     * sunEfficiancy = 0.20 (percent/day)
+     * elProduction = sunRadiation * sunEfficiancy
+     * incomeInSek = elproduction * electricPrice
+     * */
+
     fun calculateIncomeBySwedishCrowns(sunPanel: SunPanel, sunHours: Long?): Float {
         val sunRadiation: Double = 0.166 * (sunPanel.areaOfPanels) * sunHours!!
         val sunEfficiancy = 0.20
@@ -93,12 +105,8 @@ class NoteService(
     }
 
     fun deleteANoteById(noteId: Long): Note? {
-        val findRightNoteById: Note? = findingNote(noteRepository.findById(noteId), noteId)
-
-        if (findRightNoteById != null) {
-            noteRepository.delete(findRightNoteById)
-        }
-
+        val findRightNoteById: Note = findingNote(noteRepository.findById(noteId), noteId)
+        noteRepository.delete(findRightNoteById)
         return noteRepository.findByIdOrNull(noteId)
     }
 
