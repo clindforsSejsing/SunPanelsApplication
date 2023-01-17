@@ -17,10 +17,19 @@ localhost:8080/api/person/add
 }
 
 Response 201 CREATED:
-
 {
 "id": 1,
 "email": "Kalle_anka@Anka.se"
+}
+
+(ex)
+{
+"email":"KalleankaAnka.se"
+}
+
+Response 400 Bad Request:
+{
+email not in correct format, try again
 }
 ------
 GET:
@@ -29,7 +38,6 @@ localhost:8080/api/person/{personId}
 (ex) localhost:8080/api/person/1
 
 Response 200 OK:
-
 {
 "id": 1,
 "email": "Kalle_anka@Anka.se"
@@ -39,7 +47,6 @@ GET:
 localhost:8080/api/person/all
 
 Response 200 OK:
-
 [
 {
 "id": 1,
@@ -61,7 +68,6 @@ localhost:8080/api/sunpanel/add
 }
 
 Response 201 CREATED:
-
 {
 "id": 1,
 "areaOfPanels": 39.1,
@@ -75,7 +81,6 @@ GET:
 localhost:8080/api/sunpanel/all
 
 Response 200 OK:
-
 [
 {
 "id": 1,
@@ -99,7 +104,6 @@ localhost:8080/api/sunpanel/{sunpanelId}
 (ex) localhost:8080/api/sunpanel/2
 
 Response 200 OK:
-
 {
 "id": 2,
 "areaOfPanels": 17.0,
@@ -120,7 +124,6 @@ localhost:8080/api/sunpanel/{sunpanelId}
 }
 
 Response 200 OK:
-
 {
 "id": 1,
 "areaOfPanels": 170.0,
@@ -140,7 +143,6 @@ localhost:8080/api/note/person/{personId}/sunpanel/{sunpanelId}
 }
 
 Response 201 CREATED:
-
 {
 "id": 1,
 "sunrise": "2022-12-05T02:13:16",
@@ -166,7 +168,6 @@ localhost:8080/api/note/person/{personId}
 (ex) localhost:8080/api/note/person/1
 
 Response 200 OK:
-
 [
 {
 "id": 1,
@@ -193,7 +194,6 @@ localhost:8080/api/note/{noteid}
 (ex) localhost:8080/api/note/2
 
 Response 200 OK:
-
 {
 "id": 2,
 "sunrise": "2022-12-05T02:13:16",
