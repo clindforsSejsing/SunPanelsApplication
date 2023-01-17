@@ -7,18 +7,16 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
-//TODO: POST a note [x],also add earned money calculated
-// DELETE a note [] ,
-// UPDATE a note[],
-// GET a note [x] ,
 
 @RestController
 @RequestMapping("/api/note")
 class NoteController (var noteService: NoteService){
 
     @PostMapping("/person/{personId}/sunpanel/{sunpanelId}")
-    fun addANote(@RequestBody note: Note, @PathVariable personId : Long, @PathVariable sunpanelId : Long ): ResponseEntity<Note> {
-        return ResponseEntity(noteService.saveNote(note, personId, sunpanelId), HttpStatus.CREATED)
+    fun addANote(@RequestBody note: Note, @PathVariable personId : Long, @PathVariable sunpanelId : Long ): Any {
+        if(noteService.saveNote(note, personId, sunpanelId) != null){
+            return ResponseEntity(noteService.saveNote(note, personId, sunpanelId), HttpStatus.CREATED)
+        }else return ResponseEntity("Wrong format on date, needs to be in june or july, try again",HttpStatus.BAD_REQUEST)
     }
 
       @GetMapping("/{noteId}")

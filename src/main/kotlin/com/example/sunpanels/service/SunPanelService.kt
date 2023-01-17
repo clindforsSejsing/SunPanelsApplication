@@ -24,7 +24,6 @@ class SunPanelService(var sunPanelRepository: SunPanelRepository) {
         return sunPanelRepository.findAll()
     }
 
-    //make patch work
     fun updateASunPanel(sunpanelId: Long, sunPanel: SunPanel): Any {
         val findingRightId: SunPanel = sunPanelRepository.findById(sunpanelId).get()
 

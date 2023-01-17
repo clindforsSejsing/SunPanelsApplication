@@ -13,8 +13,10 @@ import java.util.*
 class PersonController(var personService: PersonService) {
 
     @PostMapping("/add")
-    fun addUser(@RequestBody person: Person): ResponseEntity<Person> {
-        return ResponseEntity(personService.savePerson(person), HttpStatus.CREATED)
+    fun addUser(@RequestBody person: Person): Any {
+        if(personService.savePerson(person) != null){
+            return ResponseEntity(personService.savePerson(person), HttpStatus.CREATED)
+        }else return ResponseEntity("Failed to save email, try again",HttpStatus.BAD_REQUEST)
     }
 
     @GetMapping("/{personId}")

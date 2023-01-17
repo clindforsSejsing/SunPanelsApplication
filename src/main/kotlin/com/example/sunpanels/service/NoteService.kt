@@ -24,15 +24,22 @@ class NoteService(
     fun saveNote(note: Note, personId: Long, sunpanelId: Long): Note? {
         val selectedPerson: Person = findingPerson(personRepository.findById(personId), personId)
         val selectedSunpanel: SunPanel = findingSunPanel(sunPanelRepository.findById(sunpanelId), sunpanelId)
-        val AmountOfSunHours = note.sunrise?.until(note.sunset, ChronoUnit.HOURS)
+        val sunriseNmbOfMonth = note.sunrise?.monthValue
+        val sunsetNmbOfMonth = note.sunset?.monthValue
 
-        note.person = selectedPerson
-        note.sunpanel = selectedSunpanel
-        note.nmbOfSunHours = AmountOfSunHours
-        note.incomeSek =
-            calculateIncomeBySwedishCrowns(selectedSunpanel, AmountOfSunHours)
-
-        return noteRepository.save(note)
+        if(sunriseNmbOfMonth == 6 || sunriseNmbOfMonth == 7 )
+        {
+            if( sunsetNmbOfMonth == 6 || sunsetNmbOfMonth == 7) {
+                val AmountOfSunHours = note.sunrise?.until(note.sunset, ChronoUnit.HOURS)
+                note.person = selectedPerson
+                note.sunpanel = selectedSunpanel
+                note.nmbOfSunHours = AmountOfSunHours
+                note.incomeSek =
+                    calculateIncomeBySwedishCrowns(selectedSunpanel, AmountOfSunHours)
+                return noteRepository.save(note)
+            }
+        }else println("wrong input in date, needs to be in june or july")
+            return null
     }
 
     fun findingPerson(entity: Optional<Person?>, personId: Long): Person {

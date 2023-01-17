@@ -11,14 +11,8 @@ class SunPanel {
      var sekPerKwh : Float = 0.0f
      var amountOfPanels : Int = 0
 
-  /*  *//*@JsonIgnore*//*
-    @OneToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.EAGER,mappedBy= "sunpanel")
-      var notes : ArrayList<Note>? = null*/
-
     @JsonIgnore
     @OneToMany(mappedBy = "sunpanel",fetch = FetchType.EAGER)
     var notes : List<Note> = ArrayList<Note>()
 
 }
-/*
-(mappedBy = "sunpanel", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)*/

@@ -21,6 +21,16 @@ Response 201 CREATED:
 "id": 1,
 "email": "Kalle_anka@Anka.se"
 }
+
+(ex)
+{
+"email":"KalleankaAnka.se"
+}
+
+Response 400 Bad Request:
+{
+email not in correct format, try again
+}
 ------
 GET:
 localhost:8080/api/person/{personId}
