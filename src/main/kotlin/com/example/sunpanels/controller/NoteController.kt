@@ -10,16 +10,19 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api/note")
-class NoteController (var noteService: NoteService){
+class NoteController(var noteService: NoteService) {
 
     @PostMapping("/person/{personId}/sunpanel/{sunpanelId}")
-    fun addANote(@RequestBody note: Note, @PathVariable personId : Long, @PathVariable sunpanelId : Long ): Any {
-        if(noteService.saveNote(note, personId, sunpanelId) != null){
+    fun addANote(@RequestBody note: Note, @PathVariable personId: Long, @PathVariable sunpanelId: Long): Any {
+        if (noteService.saveNote(note, personId, sunpanelId) != null) {
             return ResponseEntity(noteService.saveNote(note, personId, sunpanelId), HttpStatus.CREATED)
-        }else return ResponseEntity("Wrong format on date, needs to be in june or july, try again",HttpStatus.BAD_REQUEST)
+        } else return ResponseEntity(
+            "Wrong format on date, needs to be in june or july, try again",
+            HttpStatus.BAD_REQUEST
+        )
     }
 
-      @GetMapping("/{noteId}")
+    @GetMapping("/{noteId}")
     fun getANote(@PathVariable noteId: Long): ResponseEntity<Optional<Note>> {
         val note: Optional<Note> = noteService.getANote(noteId)
         return ResponseEntity(note, HttpStatus.OK)
@@ -32,8 +35,9 @@ class NoteController (var noteService: NoteService){
     }
 
     @DeleteMapping("/{noteId}/remove")
-    fun deleteOneNote(@PathVariable noteId: Long): ResponseEntity<Note> {
-        val note : Note? = noteService.deleteANoteById(noteId)
-        return ResponseEntity(note, HttpStatus.OK)
+    fun deleteOneNote(@PathVariable noteId: Long): ResponseEntity<HttpStatus> {
+        if (noteService.deleteANoteById(noteId)) {
+            return ResponseEntity(HttpStatus.OK)
+        } else return ResponseEntity(HttpStatus.SERVICE_UNAVAILABLE)
     }
 }

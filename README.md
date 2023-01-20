@@ -173,8 +173,8 @@ Response 200 OK:
 [
 {
 "id": 1,
-"sunrise": "2022-12-05T02:13:16",
-"sunset": "2022-12-05T23:13:16",
+"sunrise": "2022-12-06T02:13:16",
+"sunset": "2022-12-06T23:13:16",
 "incomeSek": 71.42,
 "nmbOfSunHours": 21,
 "person": {
@@ -199,8 +199,8 @@ Response 200 OK:
 
 {
 "id": 2,
-"sunrise": "2022-12-05T02:13:16",
-"sunset": "2022-12-05T23:13:16",
+"sunrise": "2022-12-06T02:13:16",
+"sunset": "2022-12-06T23:13:16",
 "incomeSek": 71.42,
 "nmbOfSunHours": 21,
 "person": {
@@ -222,5 +222,12 @@ DELETE a note by note id:localhost:8080/api/note/{noteid}/remove
 
 Response 200 OK: {returns nothing}
 
+if note with id not found: 
+
+Response 500 Internar Server Error {NoteNotFoundException: note with id {id} does not exist}
+
+if delete note failed: 
+
+Response 503: Service Unavailable
 
 ----

@@ -9,7 +9,6 @@ import com.example.sunpanels.exceptions.SunPanelNotFoundException
 import com.example.sunpanels.repository.NoteRepository
 import com.example.sunpanels.repository.PersonRepository
 import com.example.sunpanels.repository.SunPanelRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -32,9 +31,8 @@ class NoteService(
         val sunriseNmbOfMonth = note.sunrise?.monthValue
         val sunsetNmbOfMonth = note.sunset?.monthValue
 
-        if(sunriseNmbOfMonth == 6 || sunriseNmbOfMonth == 7 )
-        {
-            if( sunsetNmbOfMonth == 6 || sunsetNmbOfMonth == 7) {
+        if (sunriseNmbOfMonth == 6 || sunriseNmbOfMonth == 7) {
+            if (sunsetNmbOfMonth == 6 || sunsetNmbOfMonth == 7) {
                 val AmountOfSunHours = note.sunrise?.until(note.sunset, ChronoUnit.HOURS)
                 note.person = selectedPerson
                 note.sunpanel = selectedSunpanel
@@ -43,8 +41,8 @@ class NoteService(
                     calculateIncomeBySwedishCrowns(selectedSunpanel, AmountOfSunHours)
                 return noteRepository.save(note)
             }
-        }else println("wrong input in date, needs to be in june or july")
-            return null
+        } else println("wrong input in date, needs to be in june or july")
+        return null
     }
 
     fun findingPerson(entity: Optional<Person?>, personId: Long): Person {
@@ -58,7 +56,6 @@ class NoteService(
     fun findingNote(entity: Optional<Note?>, noteId: Long): Note {
         return if (entity.isPresent()) entity.get() else throw NoteNotFoundException(noteId)
     }
-
 
 
     /**
@@ -88,7 +85,7 @@ class NoteService(
     fun getAllNotesForOnePerson(personId: Long): Any {
         val findingNotesByPersonId: Person = personRepository.findById(personId).get()
         val findingNotes: MutableIterable<Note> = noteRepository.findAll()
-        val foundNotesByPerson: ArrayList<Note> = ArrayList<Note>()
+        val foundNotesByPerson = ArrayList<Note>()
 
         for (note in findingNotes) {
             if (note.person?.id == personId) {
@@ -104,10 +101,10 @@ class NoteService(
         return foundNotesByPerson
     }
 
-    fun deleteANoteById(noteId: Long): Note? {
+    fun deleteANoteById(noteId: Long): Boolean {
         val findRightNoteById: Note = findingNote(noteRepository.findById(noteId), noteId)
         noteRepository.delete(findRightNoteById)
-        return noteRepository.findByIdOrNull(noteId)
+        return (noteRepository.findById(noteId) != Optional.of(findRightNoteById))
     }
 
 }

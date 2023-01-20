@@ -38,7 +38,6 @@ class SunPanelService(var sunPanelRepository: SunPanelRepository) {
         val findingRightId: SunPanel = sunPanelRepository.findById(sunpanelId).get()
 
         if ((findingRightId.id)?.equals(sunpanelId) == true) {
-            println("getting hits.........yes!")
             val s = sunPanel
             val caclArea: Any = calculateArea(sunPanel.amountOfPanels)
             s.areaOfPanels = caclArea as Float
