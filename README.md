@@ -5,7 +5,7 @@ A program that makes it easier to calculate your profit from selling sun-energi 
 
 (remake from an earlier made, small program, that uses scanner input. See: https://github.com/clindforsSejsing/Java_small_programs/blob/main/Java_ltu/sunpanels.java )
 
-You will need to set a ${DB_PASSWORD}, and a ${SECRET_KEY} as env.variables
+You will need to set a DB_PASSWORD, and a SECRET_KEY as env.variables
 
 #API DOCS
 -----
