@@ -67,7 +67,7 @@ if no user is logged in:
 Response 401 Unauthorized {Unauthenticated}
 
 -------
-POST: GET: localhost:8080/api/person/logout
+POST: localhost:8080/api/person/logout
  Response 200 OK {Logout ok}
 
 ------
