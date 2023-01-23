@@ -8,34 +8,35 @@ A program that makes it easier to calculate your profit from selling sun-energi 
 
 #API DOCS
 -----
-POST:localhost:8080/api/person/add
+POST:localhost:8080/api/person/register
 
-(ex){"email":"Kalle_anka@Anka.se"}Response 201 CREATED:
+(ex){"name":"Kalle Anka",
+"email":"kalle@ankamail.com",
+"password":"secret_password"}Response 200 OK:
 {
 "id": 1,
-"email": "Kalle_anka@Anka.se"
+"email": "kalle@ankamail.com",
+"name": "Kalle Anka"
 }
 
 (ex){
 "email":"KalleankaAnka.se"
 }
 
-Response 400 Bad Request:
-
-{
-email not in correct format, try again
-}
+Response 406 Not Acceptable:
 
 ------
-GET:localhost:8080/api/person/{personId}
+GET:localhost:8080/api/person/login
 
-(ex) localhost:8080/api/person/1
-Response 200 OK:
+(ex) {"email":"kalle@ankamail.com", "password":"secret_password"}
+Response 200 OK {login ok}:
 
 {
 "id": 1,
 "email": "Kalle_anka@Anka.se"
 }
+if user not exists: 
+Response 400 Bad Request{Expected email not found}
 
 -------
 GET:localhost:8080/api/person/all
@@ -54,6 +55,23 @@ Response 200 OK:
 ]
 
 ----
+GET: localhost:8080/api/person/user
+(get logged in user)
+
+Response 200 OK{
+"id": 1,
+"email": "kalle@ankamail.com",
+"name": "Kalle Anka"
+}
+if no user is logged in: 
+Response 401 Unauthorized {Unauthenticated}
+
+-------
+POST: GET: localhost:8080/api/person/logout
+ Response 200 OK {Logout ok}
+
+------
+
 POST:localhost:8080/api/sunpanel/add
 
 (ex){"amountOfPanels":23,"sekPerKwh": 2.62}

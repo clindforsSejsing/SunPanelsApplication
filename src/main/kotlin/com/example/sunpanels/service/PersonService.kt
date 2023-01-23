@@ -30,4 +30,9 @@ class PersonService(var personRepository: PersonRepository) {
     fun getPersons(): MutableIterable<Person> {
         return personRepository.findAll()
     }
+
+
+    fun findByEmail(email:String) : Person?{
+        return personRepository.findByEmail(email)
+    }
 }
