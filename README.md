@@ -27,7 +27,7 @@ POST:localhost:8080/api/person/register
 Response 406 Not Acceptable:
 
 ------
-GET:localhost:8080/api/person/login
+POST:localhost:8080/api/person/login
 
 (ex) {"email":"kalle@ankamail.com", "password":"secret_password"}
 Response 200 OK {login ok}:
@@ -40,22 +40,6 @@ if user not exists:
 Response 400 Bad Request{Expected email not found}
 
 -------
-GET:localhost:8080/api/person/all
-
-Response 200 OK:
-
-[
-{
-"id": 1,
-"email": "Kalle_anka@Anka.se"
-},
-{
-"id": 2,
-"email": "Kajsa_anka@Anka.se"
-}
-]
-
-----
 GET: localhost:8080/api/person/user
 (get logged in user)
 
