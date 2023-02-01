@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
-//https://www.youtube.com/watch?v=kZGtO23Wr3E
-//kl 23 min in
 
 @Entity
 @Table(name="person")
